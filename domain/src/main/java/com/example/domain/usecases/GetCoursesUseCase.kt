@@ -2,11 +2,12 @@ package com.example.domain.usecases
 
 import com.example.domain.models.CourseModel
 import com.example.domain.repositories.ICoursesRepository
+import com.example.domain.utils.NetworkResponse
 
 class GetCoursesUseCase(private val courseRepository: ICoursesRepository) {
 
-    fun execute(): List<CourseModel> {
-        return courseRepository.getCourses()
+    suspend fun execute(): NetworkResponse<List<CourseModel>> {
+        return courseRepository.fetchCourses()
     }
 
 }
