@@ -12,6 +12,8 @@ class CoursesListAdapter(
 
 ) : ListAdapter<CourseModel, CoursesListAdapter.ViewHolder>(DIFF_CALLBACK) {
 
+    private var courseList = emptyList<CourseModel>()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = CourseItemBinding.inflate(layoutInflater, parent, false)
@@ -22,7 +24,7 @@ class CoursesListAdapter(
         val item = getItem(position)
         holder.binding.apply {
             courseRatingTxt.text = item.rate
-            courseStartDateTxt.text = item.startDate
+            courseStartDateTxt.text = item.publishDate
             courseTitleTxt.text = item.title
             courseDescriptionTxt.text = item.text
 
@@ -43,7 +45,13 @@ class CoursesListAdapter(
     }
 
     fun setData(courses: List<CourseModel>) {
-        submitList(courses.toMutableList())
+        courseList = courses
+        submitList(courseList.toMutableList())
+    }
+
+    fun updateData() {
+        courseList = courseList.sortedBy { it.publishDate }
+        submitList(courseList)
     }
 
     interface CourseClickListener {
