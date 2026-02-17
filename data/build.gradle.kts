@@ -67,4 +67,7 @@ dependencies {
     //Dagger 2
     implementation(libs.dagger)
     ksp(libs.dagger.compiler)
+
+    implementation(libs.dagger.hilt)
+    ksp(libs.ksp.dagger.hilt)
 }
