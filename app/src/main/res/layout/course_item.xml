@@ -30,6 +30,7 @@
                 app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.RoundedCorners" />
 
             <ImageButton
+                android:id="@+id/add_to_bookmark_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_bookmark"
@@ -70,7 +71,7 @@
                             app:tint="#FFC107" />
 
                         <TextView
-                            android:id="@+id/tv_rating"
+                            android:id="@+id/course_rating_txt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="4.9"
@@ -85,7 +86,7 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/tv_date"
+                        android:id="@+id/course_start_date_txt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
@@ -105,7 +106,7 @@
 
 
         <TextView
-            android:id="@+id/tv_course_title"
+            android:id="@+id/course_title_txt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -119,7 +120,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tv_course_description"
+            android:id="@+id/course_description_txt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
@@ -139,7 +140,7 @@
             android:paddingBottom="16dp">
 
             <TextView
-                android:id="@+id/tv_price"
+                android:id="@+id/course_price_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="999 ₽"

@@ -6,8 +6,11 @@ import com.example.data.network.utils.safeApiCall
 import com.example.domain.models.CourseModel
 import com.example.domain.repositories.ICoursesRepository
 import com.example.domain.utils.NetworkResponse
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class CoursesRepositoryImpl(
+@Singleton
+class CoursesRepositoryImpl @Inject constructor(
     private val coursesAPI: CoursesAPI
 ): ICoursesRepository {
 
