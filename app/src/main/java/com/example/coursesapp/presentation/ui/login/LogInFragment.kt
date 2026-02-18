@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
+import android.text.InputFilter
 import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -46,6 +47,8 @@ class LogInFragment : Fragment() {
 
         val passwordTextLayout = binding.passwordEdittextLayout
         val emailTextLayout = binding.emailEdittextLayout
+
+        emailTextLayout.editText?.filters = arrayOf(getInputFilter())
 
         setupTextWatchers()
         val enterBtn = binding.enterBtn
@@ -119,5 +122,14 @@ class LogInFragment : Fragment() {
         context.startActivity(intent)
     }
 
+
+    private fun getInputFilter() = InputFilter { source, start, end, dest, dstart, dend ->
+        for (i in start until end) {
+            if (Character.UnicodeBlock.of(source[i]) == Character.UnicodeBlock.CYRILLIC) {
+                return@InputFilter ""
+            }
+        }
+        null
+    }
 
 }

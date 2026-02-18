@@ -48,7 +48,8 @@
             android:text=""
             android:textColor="?android:attr/textColorPrimary"
             android:textColorHint="?android:attr/textColorHint"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView

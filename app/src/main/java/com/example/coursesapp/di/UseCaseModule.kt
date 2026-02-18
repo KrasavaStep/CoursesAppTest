@@ -2,7 +2,11 @@ package com.example.coursesapp.di
 
 import com.example.domain.repositories.ICoursesRepository
 import com.example.domain.repositories.ILoginRepository
-import com.example.domain.usecases.GetCoursesUseCase
+import com.example.domain.usecases.FetchCoursesUseCase
+import com.example.domain.usecases.GetCoursesFromDbUseCase
+import com.example.domain.usecases.GetLikedCoursesFromDbUseCase
+import com.example.domain.usecases.SaveCourseUseCase
+import com.example.domain.usecases.UpdateCourseUseCase
 import com.example.domain.usecases.ValidateUseCase
 import dagger.Module
 import dagger.Provides
@@ -14,10 +18,10 @@ import dagger.hilt.android.components.ViewModelComponent
 object UseCaseModule {
 
     @Provides
-    fun provideGetCoursesUseCase(
+    fun provideFetchCoursesUseCase(
         repository: ICoursesRepository
-    ): GetCoursesUseCase {
-        return GetCoursesUseCase(repository)
+    ): FetchCoursesUseCase {
+        return FetchCoursesUseCase(repository)
     }
 
     @Provides
@@ -25,6 +29,34 @@ object UseCaseModule {
         repository: ILoginRepository
     ): ValidateUseCase {
         return ValidateUseCase(repository)
+    }
+
+    @Provides
+    fun provideSaveCourseUseCase(
+        repository: ICoursesRepository
+    ): SaveCourseUseCase {
+        return SaveCourseUseCase(repository)
+    }
+
+    @Provides
+    fun provideUpdateCourseUseCase(
+        repository: ICoursesRepository
+    ): UpdateCourseUseCase {
+        return UpdateCourseUseCase(repository)
+    }
+
+    @Provides
+    fun provideGetCoursesFromDbUseCase(
+        repository: ICoursesRepository
+    ): GetCoursesFromDbUseCase {
+        return GetCoursesFromDbUseCase(repository)
+    }
+
+    @Provides
+    fun provideGetLikedCoursesFromDbUseCase(
+        repository: ICoursesRepository
+    ): GetLikedCoursesFromDbUseCase {
+        return GetLikedCoursesFromDbUseCase(repository)
     }
 
 }
