@@ -5,7 +5,7 @@ import com.example.domain.repositories.ICoursesRepository
 
 class SaveCourseUseCase(private val courseRepository: ICoursesRepository) {
 
-    suspend fun execute(course: CourseModel): Boolean {
+    suspend fun execute(course: CourseModel) {
         return courseRepository.saveCourse(course)
     }
 

@@ -14,6 +14,8 @@ import com.example.coursesapp.databinding.ActivityMainBinding
 import com.example.coursesapp.databinding.FragmentHomeBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
+import androidx.core.view.get
+import androidx.core.view.size
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -40,6 +42,32 @@ class MainActivity : AppCompatActivity() {
             } else {
                 navView.visibility = View.VISIBLE
             }
+        }
+
+        navView.setOnItemSelectedListener { menuItem ->
+            resetAllIcons(navView)
+            menuItem.isChecked = true
+            when (menuItem.itemId) {
+                R.id.navigation_home -> {
+                    navController.navigate(R.id.navigation_home)
+                    true
+                }
+                R.id.navigation_profile -> {
+                    navController.navigate(R.id.navigation_profile)
+                    true
+                }
+                R.id.navigation_bookmark -> {
+                    navController.navigate(R.id.navigation_bookmark)
+                    true
+                }
+                else -> false
+            }
+        }
+    }
+
+    private fun resetAllIcons(bottomNavigation: BottomNavigationView) {
+        for (i in 0 until bottomNavigation.menu.size) {
+            bottomNavigation.menu[i].isChecked = false
         }
     }
 

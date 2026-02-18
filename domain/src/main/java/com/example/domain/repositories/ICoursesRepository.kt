@@ -7,6 +7,12 @@ interface ICoursesRepository {
 
     suspend fun fetchCourses(): NetworkResponse<List<CourseModel>>
 
-    suspend fun saveCourse(course: CourseModel): Boolean
+    suspend fun saveCourse(course: CourseModel)
+
+    suspend fun getLikedCourses(): List<CourseModel>
+
+    suspend fun getCourses(): List<CourseModel>
+
+    suspend fun updateCourse(course: CourseModel): Boolean
 
 }

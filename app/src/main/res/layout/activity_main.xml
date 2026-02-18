@@ -24,6 +24,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/bottom_nav_menu"
         app:itemIconSize="24dp"
+        app:itemIconTint="@color/nav_bar_colors"
+        app:itemTextColor="@color/nav_bar_colors"
         />
 
 

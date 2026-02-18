@@ -64,10 +64,14 @@ dependencies {
     implementation(libs.logging.interceptor)
     implementation(libs.okhttp)
 
-    //Dagger 2
+    //Dagger 2 / Hilt
     implementation(libs.dagger)
     ksp(libs.dagger.compiler)
 
     implementation(libs.dagger.hilt)
     ksp(libs.ksp.dagger.hilt)
+
+    //Room
+    implementation(libs.androidx.room.runtime)
+    ksp(libs.androidx.room.compiler)
 }

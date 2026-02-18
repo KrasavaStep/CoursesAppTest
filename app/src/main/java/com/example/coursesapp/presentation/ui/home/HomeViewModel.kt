@@ -5,15 +5,22 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.models.CourseModel
-import com.example.domain.usecases.GetCoursesUseCase
+import com.example.domain.usecases.FetchCoursesUseCase
+import com.example.domain.usecases.GetCoursesFromDbUseCase
+import com.example.domain.usecases.SaveCourseUseCase
+import com.example.domain.usecases.UpdateCourseUseCase
 import com.example.domain.utils.NetworkResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val getCoursesUseCase: GetCoursesUseCase
+    private val fetchCoursesUseCase: FetchCoursesUseCase,
+    private val saveCourseUseCase: SaveCourseUseCase,
+    private val updateCourseUseCase: UpdateCourseUseCase,
+    private val getCoursesFromDbUseCase: GetCoursesFromDbUseCase
 ) : ViewModel() {
 
     private val _state = MutableLiveData<HomeState>()
@@ -22,6 +29,7 @@ class HomeViewModel @Inject constructor(
     init {
         _state.value = HomeState(
             isLoading = false,
+            isCourseSaved = false,
             data = emptyList(),
             errorBody = "",
             errorCode = 200,
@@ -42,34 +50,49 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun getCoursesFromNetwork() {
-        viewModelScope.launch {
-            _state.value = _state.value?.copy(
+        viewModelScope.launch(Dispatchers.IO) {
+            _state.postValue(_state.value?.copy(
                 isLoading = true,
-            )
-            when (val response = getCoursesUseCase.execute()) {
+            ))
+            when (val response = fetchCoursesUseCase.execute()) {
                 is NetworkResponse.Error -> {
-                    _state.value = _state.value?.copy(
+                    _state.postValue(_state.value?.copy(
                         isLoading = false,
                         errorCode = response.responseCode!!,
                         errorBody = response.errorBody.toString()
-                    )
+                    ))
                 }
 
                 is NetworkResponse.Exception -> {
-                    _state.value = _state.value?.copy(
+                    _state.postValue(_state.value?.copy(
                         isLoading = false,
                         exception = response.exceptionMessage.toString()
-                    )
+                    ))
                 }
 
                 is NetworkResponse.Success -> {
-                    _state.value = _state.value?.copy(
+                    saveCoursesToDb(response.data ?: emptyList())
+                    _state.postValue(_state.value?.copy(
                         isLoading = false,
-                        data = response.data ?: emptyList()
-                    )
+                        data = getCoursesFromDb()
+                    ))
                 }
             }
         }
+    }
+
+    private suspend fun saveCoursesToDb(coursesList: List<CourseModel>) {
+        coursesList.forEach {
+            saveCourseUseCase.execute(it)
+        }
+    }
+
+    private suspend fun getCoursesFromDb(): List<CourseModel> {
+        return getCoursesFromDbUseCase.execute()
+    }
+
+    private suspend fun updateCourse() {
+
     }
 
 }

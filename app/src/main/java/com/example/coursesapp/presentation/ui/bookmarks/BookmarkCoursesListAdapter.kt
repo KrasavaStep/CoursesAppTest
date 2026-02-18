@@ -1,4 +1,4 @@
-package com.example.coursesapp.presentation.ui.home
+package com.example.coursesapp.presentation.ui.bookmarks
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,10 +7,11 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.coursesapp.R
 import com.example.coursesapp.databinding.CourseItemBinding
+import com.example.coursesapp.presentation.ui.home.CoursesListAdapter
 import com.example.domain.models.CourseModel
 
-class CoursesListAdapter() :
-    ListAdapter<CourseModel, CoursesListAdapter.ViewHolder>(DIFF_CALLBACK) {
+class BookmarkCoursesListAdapter :
+    ListAdapter<CourseModel, BookmarkCoursesListAdapter.ViewHolder>(DIFF_CALLBACK) {
 
     private var courseList = emptyList<CourseModel>()
 
