@@ -1,7 +1,9 @@
 package com.example.coursesapp.di
 
 import com.example.domain.repositories.ICoursesRepository
+import com.example.domain.repositories.ILoginRepository
 import com.example.domain.usecases.GetCoursesUseCase
+import com.example.domain.usecases.ValidateUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,6 +18,13 @@ object UseCaseModule {
         repository: ICoursesRepository
     ): GetCoursesUseCase {
         return GetCoursesUseCase(repository)
+    }
+
+    @Provides
+    fun provideValidateUseCase(
+        repository: ILoginRepository
+    ): ValidateUseCase {
+        return ValidateUseCase(repository)
     }
 
 }

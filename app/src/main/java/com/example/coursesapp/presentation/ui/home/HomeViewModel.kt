@@ -27,7 +27,6 @@ class HomeViewModel @Inject constructor(
             errorCode = 200,
             exception = ""
         )
-        getCoursesFromNetwork()
     }
 
     fun sendEvent(event: HomeEvent) {

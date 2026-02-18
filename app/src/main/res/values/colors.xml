@@ -13,4 +13,6 @@
     <color name="ok_btn_gradient_end">#F95D00</color>
 
     <color name="vk_btn_bg">#2683ED</color>
+
+    <color name="error_color">#FF0000</color>
 </resources>
