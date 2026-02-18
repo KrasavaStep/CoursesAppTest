@@ -36,6 +36,8 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.bind(view)
         val adapter = CoursesListAdapter()
 
+        homeViewModel.sendEvent(HomeEvent.GetCoursesEvent())
+
         binding.coursesRecyclerView.adapter = adapter
         val layoutManager = LinearLayoutManager(context)
         layoutManager.orientation = LinearLayoutManager.VERTICAL

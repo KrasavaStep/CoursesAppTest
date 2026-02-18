@@ -2,7 +2,9 @@ package com.example.data.di
 
 import com.example.data.network.CoursesAPI
 import com.example.data.repository.CoursesRepositoryImpl
+import com.example.data.repository.LoginRepositoryImpl
 import com.example.domain.repositories.ICoursesRepository
+import com.example.domain.repositories.ILoginRepository
 import com.example.domain.usecases.GetCoursesUseCase
 import dagger.Binds
 import dagger.Module
@@ -19,5 +21,10 @@ abstract class DataModule {
     abstract fun bindCourseRepository(
         courseRepositoryImpl: CoursesRepositoryImpl
     ): ICoursesRepository
+
+    @Binds
+    abstract fun bindLoginRepository(
+        loginRepository: LoginRepositoryImpl
+    ): ILoginRepository
 
 }
