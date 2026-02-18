@@ -10,7 +10,8 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.coursesapp.R
 import com.example.coursesapp.databinding.FragmentHomeBinding
-import com.example.coursesapp.presentation.ui.home.CoursesListAdapter
+import com.example.coursesapp.presentation.ui.adapter_utils.CoursesListAdapter
+import com.example.coursesapp.presentation.ui.adapter_utils.convertToCourseModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -35,7 +36,11 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentHomeBinding.bind(view)
-        val adapter = CoursesListAdapter()
+
+        val adapter = CoursesListAdapter { courseItem ->
+            homeViewModel.sendEvent(HomeEvent.AddToBookmark(courseItem.convertToCourseModel()))
+        }
+
         binding.coursesRecyclerView.adapter = adapter
         val layoutManager = LinearLayoutManager(context)
         layoutManager.orientation = LinearLayoutManager.VERTICAL
@@ -58,11 +63,7 @@ class HomeFragment : Fragment() {
                 binding.serverErrorView.visibility = View.GONE
             }
             if (!state.data.isEmpty()) {
-                binding.emptyListMsg.visibility = View.GONE
-                adapter.setData(state.data)
-            }
-            else {
-                binding.emptyListMsg.visibility = View.VISIBLE
+                adapter.submitCoursesList(state.data)
             }
             if (!state.exception.isEmpty()) {
                 binding.exceptionMsg.visibility = View.VISIBLE
@@ -74,7 +75,7 @@ class HomeFragment : Fragment() {
         }
 
         binding.filterByDateBtn.setOnClickListener {
-            adapter.updateData()
+            homeViewModel.sendEvent(HomeEvent.SortCourseList())
         }
 
     }

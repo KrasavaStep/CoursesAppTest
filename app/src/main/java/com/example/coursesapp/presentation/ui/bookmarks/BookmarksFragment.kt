@@ -9,6 +9,8 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.coursesapp.R
 import com.example.coursesapp.databinding.FragmentBookmarksBinding
+import com.example.coursesapp.presentation.ui.adapter_utils.CoursesListAdapter
+import com.example.coursesapp.presentation.ui.adapter_utils.convertToCourseModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.getValue
 
@@ -34,7 +36,10 @@ class BookmarksFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentBookmarksBinding.bind(view)
-        val adapter = BookmarkCoursesListAdapter()
+
+        val adapter = CoursesListAdapter { courseItem ->
+            bookmarksViewModel.sendEvent(BookmarksEvent.RemoveFromBookmark(courseItem.convertToCourseModel()))
+        }
         binding.coursesRecyclerView.adapter = adapter
         val layoutManager = LinearLayoutManager(context)
         layoutManager.orientation = LinearLayoutManager.VERTICAL
@@ -50,9 +55,10 @@ class BookmarksFragment : Fragment() {
             }
             if (!state.data.isEmpty()) {
                 binding.emptyListMsg.visibility = View.GONE
-                adapter.setData(state.data)
+                adapter.submitCoursesList(state.data)
             } else {
                 binding.emptyListMsg.visibility = View.VISIBLE
+                adapter.submitCoursesList(state.data)
             }
         }
     }

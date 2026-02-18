@@ -29,7 +29,6 @@ class HomeViewModel @Inject constructor(
     init {
         _state.value = HomeState(
             isLoading = false,
-            isCourseSaved = false,
             data = emptyList(),
             errorBody = "",
             errorCode = 200,
@@ -43,39 +42,51 @@ class HomeViewModel @Inject constructor(
                 getCoursesFromNetwork()
             }
 
-            is HomeEvent.SaveCoursesEvent -> {
+            is HomeEvent.AddToBookmark -> {
+                updateCourse(event.course)
+            }
 
+            is HomeEvent.SortCourseList -> {
+                sortCoursesList()
             }
         }
     }
 
     private fun getCoursesFromNetwork() {
         viewModelScope.launch(Dispatchers.IO) {
-            _state.postValue(_state.value?.copy(
-                isLoading = true,
-            ))
+            _state.postValue(
+                _state.value?.copy(
+                    isLoading = true,
+                )
+            )
             when (val response = fetchCoursesUseCase.execute()) {
                 is NetworkResponse.Error -> {
-                    _state.postValue(_state.value?.copy(
-                        isLoading = false,
-                        errorCode = response.responseCode!!,
-                        errorBody = response.errorBody.toString()
-                    ))
+                    _state.postValue(
+                        _state.value?.copy(
+                            isLoading = false,
+                            errorCode = response.responseCode!!,
+                            errorBody = response.errorBody.toString()
+                        )
+                    )
                 }
 
                 is NetworkResponse.Exception -> {
-                    _state.postValue(_state.value?.copy(
-                        isLoading = false,
-                        exception = response.exceptionMessage.toString()
-                    ))
+                    _state.postValue(
+                        _state.value?.copy(
+                            isLoading = false,
+                            exception = response.exceptionMessage.toString()
+                        )
+                    )
                 }
 
                 is NetworkResponse.Success -> {
                     saveCoursesToDb(response.data ?: emptyList())
-                    _state.postValue(_state.value?.copy(
-                        isLoading = false,
-                        data = getCoursesFromDb()
-                    ))
+                    _state.postValue(
+                        _state.value?.copy(
+                            isLoading = false,
+                            data = getCoursesFromDb()
+                        )
+                    )
                 }
             }
         }
@@ -91,8 +102,29 @@ class HomeViewModel @Inject constructor(
         return getCoursesFromDbUseCase.execute()
     }
 
-    private suspend fun updateCourse() {
+    private fun updateCourse(course: CourseModel) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val newCourse = if (course.hasLike) {
+                course.copy(hasLike = false)
+            } else {
+                course.copy(hasLike = true)
+            }
+            val list = _state.value?.data?.toMutableList()
+            list?.forEach {
+                if (it.id == course.id) {
+                    list[list.indexOf(it)] = newCourse
+                }
+            }
+            _state.postValue(_state.value?.copy(data = list?.toList() ?: emptyList()))
 
+            updateCourseUseCase.execute(newCourse)
+        }
     }
+
+    private fun sortCoursesList() {
+        _state.value = _state.value?.copy(data = _state.value?.data?.sortedBy { it.publishDate }
+            ?: emptyList())
+    }
+
 
 }
