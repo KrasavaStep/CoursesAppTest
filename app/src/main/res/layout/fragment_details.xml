@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="16dp"
-    android:layout_marginEnd="16dp"
-    android:layout_marginBottom="12dp"
-    android:foreground="?android:attr/selectableItemBackground"
-    app:cardBackgroundColor="@color/element_bg_color"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="2dp">
+    android:layout_height="match_parent"
+    tools:context=".presentation.ui.details.DetailsFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,22 +18,32 @@
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:layout_width="match_parent"
-                android:layout_height="140dp"
+                android:layout_height="240dp"
                 android:contentDescription="item cover"
                 android:scaleType="centerCrop"
-                android:src="@drawable/recycler_item_cover"
-                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.RoundedCorners" />
+                android:src="@drawable/recycler_item_cover" />
 
             <ImageButton
                 android:id="@+id/add_to_bookmark_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_bookmark"
-                android:padding="4dp"
-                android:background="@drawable/bg_rounded_element"
                 android:layout_gravity="end|top"
                 android:layout_margin="8dp"
+                android:background="@drawable/bg_rounded_element"
+                android:padding="14dp"
+                android:src="@drawable/ic_bookmark"
                 />
+
+            <ImageButton
+                android:id="@+id/back_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|top"
+                android:layout_margin="8dp"
+                android:background="@drawable/bg_rounded_element"
+                android:padding="12dp"
+                android:src="@drawable/ic_arrow_back"
+                app:tint="@color/white" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -49,10 +54,6 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <!--<eightbitlab.com.blurview.BlurTarget
-                    android:id="@+id/rating_blur_target"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">-->
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -79,11 +80,6 @@
                             android:textSize="14sp"
                             android:textStyle="bold" />
                     </LinearLayout>
-               <!--</eightbitlab.com.blurview.BlurTarget>-->
-
-                <!--<eightbitlab.com.blurview.BlurTarget
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">-->
 
                     <TextView
                         android:id="@+id/course_start_date_txt"
@@ -98,7 +94,6 @@
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
-                <!--/eightbitlab.com.blurview.BlurTarget-->
 
             </LinearLayout>
 
@@ -116,70 +111,60 @@
             android:paddingHorizontal="16dp"
             android:text="Java-разработчик с нуля"
             android:textColor="?android:attr/textColorPrimary"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textFontWeight="400"
+            android:textSize="28sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingBottom="16dp">
+
+            <Button
+                android:id="@+id/start_course_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:backgroundTint="?attr/colorPrimary"
+                android:text="Начать курс"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/swap_to_platform_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/element_bg_color"
+                android:text="Перейти на платформу"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:paddingHorizontal="16dp"
+            android:text="О курсе"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textFontWeight="400"
+            android:textSize="28sp" />
 
         <TextView
             android:id="@+id/course_description_txt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
-            android:ellipsize="end"
-            android:maxLines="2"
             android:paddingHorizontal="16dp"
-            android:text="Освойте backend-разработку и программирование на Java, фреймворки..."
+            android:text="Освойте backend-разработку и программирование на Java, фреймворки Spring и Maven, работу с базами данных и API. Создайте свой собственный проект, собрав портфолио и став востребованным специалистом для любой IT компании."
             android:textColor="#BFBFBF"
-            android:textSize="14sp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingHorizontal="16dp"
-            android:paddingBottom="16dp">
-
-            <TextView
-                android:id="@+id/course_price_txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="999 ₽"
-                android:textColor="?android:attr/textColorPrimary"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="1" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:padding="8dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Подробнее"
-                    android:textColor="?attr/colorPrimary"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-
-                <ImageView
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:layout_marginStart="4dp"
-                    android:src="@drawable/ic_arrow_forward"
-                    app:tint="?attr/colorPrimary" />
-
-            </LinearLayout>
-
-        </LinearLayout>
+            android:textSize="16sp" />
 
     </LinearLayout>
 
-</com.google.android.material.card.MaterialCardView>
+</FrameLayout>

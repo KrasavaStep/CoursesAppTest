@@ -5,25 +5,33 @@ import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
 
 
 class CoursesListAdapter(
+    onItemClick: (ListItem.CourseItem) -> Unit,
     onBookmarkClick: (ListItem.CourseItem) -> Unit
-): AsyncListDifferDelegationAdapter<ListItem>(diffUtilCallback) {
+) : AsyncListDifferDelegationAdapter<ListItem>(diffUtilCallback) {
 
 
     init {
-        delegatesManager.addDelegate(courseDelegate(onBookmarkClick))
+        delegatesManager.addDelegate(
+            courseDelegate(
+                onItemClick = onItemClick,
+                onBookmarksClick = onBookmarkClick
+            )
+        )
     }
 
     fun submitCoursesList(courses: List<CourseModel>) {
 
-        items = courses.map { ListItem.CourseItem(
-            id = it.id,
-            title = it.title,
-            text = it.text,
-            price = it.price,
-            rate = it.rate,
-            startDate = it.startDate,
-            hasLike = it.hasLike,
-            publishDate = it.publishDate
-        ) }
+        items = courses.map {
+            ListItem.CourseItem(
+                id = it.id,
+                title = it.title,
+                text = it.text,
+                price = it.price,
+                rate = it.rate,
+                startDate = it.startDate,
+                hasLike = it.hasLike,
+                publishDate = it.publishDate
+            )
+        }
     }
 }

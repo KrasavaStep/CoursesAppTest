@@ -5,4 +5,6 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.jvm) apply false
     alias(libs.plugins.dagger.hilt) apply false
     alias(libs.plugins.devtools.ksp) apply false
+    alias(libs.plugins.androidx.navigation.safeargs) apply false
+    //id("org.jetbrains.kotlin.android") version "2.3.10" apply false
 }

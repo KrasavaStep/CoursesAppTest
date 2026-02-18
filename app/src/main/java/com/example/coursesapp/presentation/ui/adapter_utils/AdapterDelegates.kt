@@ -5,13 +5,18 @@ import com.example.coursesapp.databinding.CourseItemBinding
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
 
 fun courseDelegate(
-    onBookmarksClick: (ListItem.CourseItem) -> Unit
+    onBookmarksClick: (ListItem.CourseItem) -> Unit,
+    onItemClick: (ListItem.CourseItem) -> Unit
 ) = adapterDelegateViewBinding<ListItem.CourseItem, ListItem, CourseItemBinding>(
     { layoutInflater, parent -> CourseItemBinding.inflate(layoutInflater, parent, false) }
 ) {
 
     binding.addToBookmarkBtn.setOnClickListener {
         onBookmarksClick(item)
+    }
+
+    binding.root.setOnClickListener {
+        onItemClick(item)
     }
 
     bind { payloads ->
