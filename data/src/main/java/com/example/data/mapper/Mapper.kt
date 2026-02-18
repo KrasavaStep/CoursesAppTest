@@ -17,7 +17,7 @@ object Mapper {
         id = courseModelDTO.id,
         title = courseModelDTO.title,
         text = courseModelDTO.text,
-        price = courseModelDTO.price + "₽",
+        price = courseModelDTO.price,
         rate = courseModelDTO.rate,
         startDate = formatDate(courseModelDTO.startDate),
         hasLike = courseModelDTO.hasLike,

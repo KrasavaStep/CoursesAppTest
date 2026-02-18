@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.domain.models.CourseModel
 import com.example.domain.usecases.GetLikedCoursesFromDbUseCase
 import com.example.domain.usecases.UpdateCourseUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -34,6 +35,10 @@ class BookmarksViewModel @Inject constructor(
             is BookmarksEvent.GetLikedCoursesEvent -> {
                 getLikedCourses()
             }
+
+            is BookmarksEvent.RemoveFromBookmark -> {
+                updateCourse(event.course)
+            }
         }
     }
 
@@ -42,7 +47,6 @@ class BookmarksViewModel @Inject constructor(
             _state.postValue(_state.value?.copy(isLoading = true))
 
             val data = getLikedCoursesFromDbUseCase.execute()
-            Log.d("DB_DATA", data.toString())
 
             _state.postValue(
                 _state.value?.copy(
@@ -50,6 +54,22 @@ class BookmarksViewModel @Inject constructor(
                     data = data
                 )
             )
+        }
+    }
+
+    private fun updateCourse(course: CourseModel){
+        viewModelScope.launch(Dispatchers.IO) {
+            val newCourse = course.copy(hasLike = false)
+            updateCourseUseCase.execute(newCourse)
+
+            val list = _state.value?.data?.toMutableList()
+            list?.forEach {
+                if (it.id == course.id) {
+                    list.remove(it)
+                }
+            }
+            _state.postValue(_state.value?.copy(data = list?.toList() ?: emptyList()))
+
         }
     }
 
