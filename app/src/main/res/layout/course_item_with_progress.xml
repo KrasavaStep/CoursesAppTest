@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginBottom="12dp"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardBackgroundColor="@color/element_bg_color"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:contentDescription="item cover"
+                android:scaleType="centerCrop"
+                android:src="@drawable/recycler_item_cover"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.RoundedCorners" />
+
+            <ImageButton
+                android:id="@+id/add_to_bookmark_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|top"
+                android:layout_margin="8dp"
+                android:background="@drawable/bg_rounded_element"
+                android:padding="4dp"
+                android:src="@drawable/ic_bookmark" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|bottom"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="8dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <!--<eightbitlab.com.blurview.BlurTarget
+                    android:id="@+id/rating_blur_target"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">-->
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_rounded_element"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="4dp"
+                        android:paddingVertical="2dp">
+
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:layout_marginEnd="4dp"
+                            android:src="@drawable/ic_star"
+                            app:tint="#FFC107" />
+
+                        <TextView
+                            android:id="@+id/course_rating_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="4.9"
+                            android:textColor="?android:attr/textColorPrimary"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                <!--</eightbitlab.com.blurview.BlurTarget>-->
+
+                <!--<eightbitlab.com.blurview.BlurTarget
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">-->
+
+                    <TextView
+                        android:id="@+id/course_start_date_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:background="@drawable/bg_rounded_element"
+                        android:paddingHorizontal="4dp"
+                        android:paddingVertical="2dp"
+                        android:text="22 Мая 2024"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                <!--</eightbitlab.com.blurview.BlurTarget>-->
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+
+        <TextView
+            android:id="@+id/course_title_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="4dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:paddingHorizontal="16dp"
+            android:text="Java-разработчик с нуля"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingBottom="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:text="50%"
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="14sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="22"
+                        android:textColor="?attr/colorPrimary"
+                        android:textSize="14sp"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="/44 уроков"
+                        android:textColor="#666666"
+                        android:textSize="14sp"
+                        />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <ProgressBar
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="#E0E0E0"
+                android:max="100"
+                android:progress="50"
+                android:progressTint="?attr/colorPrimary" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

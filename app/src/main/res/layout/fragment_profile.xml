@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="24dp"
+        android:text="Профиль"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textFontWeight="400"
+        android:textSize="28sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:background="@drawable/bg_rounded_element"
+        android:orientation="vertical"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="8dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:paddingVertical="12dp"
+            android:text="Написать в поддержку"
+            android:textSize="16sp"
+            app:drawableEndCompat="@drawable/ic_arrow_forward"
+            app:drawableTint="?android:attr/textColorPrimary" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E0E0E0" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:paddingVertical="12dp"
+            android:text="Настройки"
+            android:textSize="16sp"
+            app:drawableEndCompat="@drawable/ic_arrow_forward"
+            app:drawableTint="?android:attr/textColorPrimary" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E0E0E0" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:paddingVertical="12dp"
+            android:text="Выйти из аккаунта"
+            android:textSize="16sp"
+            app:drawableEndCompat="@drawable/ic_arrow_forward"
+            app:drawableTint="?android:attr/textColorPrimary" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="18dp"
+        android:layout_marginBottom="16dp"
+        android:text="Ваши курсы"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textFontWeight="400"
+        android:textSize="28sp" />
+
+    <include layout="@layout/course_item_with_progress" />
+
+</LinearLayout>

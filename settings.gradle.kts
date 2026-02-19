@@ -8,6 +8,7 @@ pluginManagement {
             }
         }
         mavenCentral()
+        maven { url = uri("https://jitpack.io/#Dimezis/BlurView") }
         gradlePluginPortal()
     }
 }
@@ -16,9 +17,12 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven { url = uri("https://jitpack.io") }
+        gradlePluginPortal()
     }
 }
 
 rootProject.name = "CoursesApp"
 include(":app")
- 
+include(":data")
+include(":domain")

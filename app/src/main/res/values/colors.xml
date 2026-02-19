@@ -2,4 +2,22 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="color_primary">#9C27B0</color>
+    <color name="color_primary_variant">#7B1FA2</color>
+    <color name="color_accent">#A5D6A7</color>
+
+    <color name="element_bg_color">#C2C8E2</color>
+
+    <color name="ok_btn_gradient_start">#F98509</color>
+    <color name="ok_btn_gradient_end">#F95D00</color>
+
+    <color name="vk_btn_bg">#2683ED</color>
+
+    <color name="error_color">#FF0000</color>
+
+    <!--<selector xmlns:android="http://schemas.android.com/apk/res/android">
+        <item android:color="@color/purple_500" android:state_checked="true" />
+        <item android:color="#757575" android:state_checked="false" />
+    </selector>-->
 </resources>

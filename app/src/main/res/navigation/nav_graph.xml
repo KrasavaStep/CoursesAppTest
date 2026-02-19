@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/navigation_login">
+
+    <fragment
+        android:id="@+id/navigation_login"
+        android:name="com.example.coursesapp.presentation.ui.login.LogInFragment"
+        android:label="Вход" />
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.example.coursesapp.presentation.ui.home.HomeFragment"
+        android:label="Главная" >
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_details"
+            app:destination="@id/navigation_details" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_bookmark"
+        android:name="com.example.coursesapp.presentation.ui.bookmarks.BookmarksFragment"
+        android:label="Избранное" />
+
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.example.coursesapp.presentation.ui.profile.ProfileFragment"
+        android:label="Аккаунт" />
+
+    <fragment
+        android:id="@+id/navigation_details"
+        android:name="com.example.coursesapp.presentation.ui.details.DetailsFragment"
+        android:label="Аккаунт" >
+        <action
+            android:id="@+id/action_navigation_details_to_navigation_home"
+            app:destination="@id/navigation_home"
+            app:popUpTo="@id/navigation_home" />
+        <argument
+            android:name="course_data"
+            app:argType="com.example.coursesapp.presentation.data.model.CourseNavModel" />
+    </fragment>
+</navigation>

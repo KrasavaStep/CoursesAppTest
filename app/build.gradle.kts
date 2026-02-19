@@ -1,6 +1,11 @@
 plugins {
     alias(libs.plugins.android.application)
+    id("com.google.dagger.hilt.android")
+    id("com.google.devtools.ksp")
+    id("androidx.navigation.safeargs.kotlin")
+    id("kotlin-parcelize")
 }
+
 
 android {
     namespace = "com.example.coursesapp"
@@ -31,9 +36,16 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
+    implementation(project(":domain"))
+    implementation(project(":data"))
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -42,4 +54,25 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    //Navigation
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
+
+    //Blurview
+    //implementation(libs.blurview)
+
+    //Hilt
+    implementation(libs.dagger.hilt)
+    ksp(libs.ksp.dagger.hilt)
+    implementation(libs.androidx.hilt.lifecycle.viewmodel)
+    ksp(libs.androidx.hilt.compiler)
+    implementation(libs.androidx.hilt.navigation.compose)
+
+    //Room
+    implementation(libs.androidx.room.runtime)
+    ksp(libs.androidx.room.compiler)
+
+    //Adapter delegates
+    implementation(libs.adapterdelegates4.kotlin.dsl.viewbinding)
 }
