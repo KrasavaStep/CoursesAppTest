@@ -1,7 +1,9 @@
 package com.example.coursesapp.presentation.data.model
 
 import android.os.Parcelable
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class CourseNavModel(
     val id: Int,
     val title: String,
@@ -11,5 +13,5 @@ data class CourseNavModel(
     val startDate: String,
     val hasLike: Boolean,
     val publishDate: String
-): Parcelable
+): java.io.Serializable
 
