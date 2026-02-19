@@ -37,9 +37,9 @@ class BookmarksFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentBookmarksBinding.bind(view)
 
-        val adapter = CoursesListAdapter { courseItem ->
+        val adapter = CoursesListAdapter(onItemClick = {}, onBookmarkClick = { courseItem ->
             bookmarksViewModel.sendEvent(BookmarksEvent.RemoveFromBookmark(courseItem.convertToCourseModel()))
-        }
+        })
         binding.coursesRecyclerView.adapter = adapter
         val layoutManager = LinearLayoutManager(context)
         layoutManager.orientation = LinearLayoutManager.VERTICAL

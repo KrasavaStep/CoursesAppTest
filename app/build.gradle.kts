@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     id("com.google.dagger.hilt.android")
     id("com.google.devtools.ksp")
+    id("androidx.navigation.safeargs.kotlin")
+    id("kotlin-parcelize")
 }
 
 
@@ -58,7 +60,7 @@ dependencies {
     implementation(libs.androidx.navigation.ui.ktx)
 
     //Blurview
-    implementation(libs.blurview)
+    //implementation(libs.blurview)
 
     //Hilt
     implementation(libs.dagger.hilt)

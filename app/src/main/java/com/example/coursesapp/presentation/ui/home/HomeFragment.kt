@@ -7,11 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.coursesapp.R
 import com.example.coursesapp.databinding.FragmentHomeBinding
 import com.example.coursesapp.presentation.ui.adapter_utils.CoursesListAdapter
+import com.example.coursesapp.presentation.ui.adapter_utils.ListItem
 import com.example.coursesapp.presentation.ui.adapter_utils.convertToCourseModel
+import com.example.coursesapp.presentation.ui.adapter_utils.convertToNavCourseModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -37,9 +40,14 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentHomeBinding.bind(view)
 
-        val adapter = CoursesListAdapter { courseItem ->
-            homeViewModel.sendEvent(HomeEvent.AddToBookmark(courseItem.convertToCourseModel()))
-        }
+        val adapter = CoursesListAdapter(
+            onItemClick = { courseItem ->
+                navigateToDetailsScreen(courseItem)
+            },
+
+            onBookmarkClick = { courseItem ->
+                homeViewModel.sendEvent(HomeEvent.AddToBookmark(courseItem.convertToCourseModel()))
+            })
 
         binding.coursesRecyclerView.adapter = adapter
         val layoutManager = LinearLayoutManager(context)
@@ -58,8 +66,7 @@ class HomeFragment : Fragment() {
                 binding.serverErrorView.visibility = View.VISIBLE
                 binding.errorCodeTxt.text = state.errorCode.toString()
                 binding.errorMsgTxt.text = state.errorBody
-            }
-            else {
+            } else {
                 binding.serverErrorView.visibility = View.GONE
             }
             if (!state.data.isEmpty()) {
@@ -68,8 +75,7 @@ class HomeFragment : Fragment() {
             if (!state.exception.isEmpty()) {
                 binding.exceptionMsg.visibility = View.VISIBLE
                 Log.d("TEST_LOAD_DATA", "exc = ${state.exception}")
-            }
-            else {
+            } else {
                 binding.exceptionMsg.visibility = View.GONE
             }
         }
@@ -78,5 +84,10 @@ class HomeFragment : Fragment() {
             homeViewModel.sendEvent(HomeEvent.SortCourseList())
         }
 
+    }
+
+    private fun navigateToDetailsScreen(courseData: ListItem.CourseItem) {
+        val action = HomeFragmentDirections.actionNavigationHomeToNavigationDetails(courseData = courseData.convertToNavCourseModel())
+        findNavController().navigate(action)
     }
 }
